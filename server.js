@@ -32,7 +32,8 @@ app.use(clientSessions({
   activeDuration: 5 * 60 * 1000,
   cookie: {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production'
+    secure: true,           
+    sameSite: 'lax'        
   }
 }));
 
