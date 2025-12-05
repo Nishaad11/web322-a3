@@ -25,6 +25,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.set("trust proxy", 1); 
+
 app.use(clientSessions({
   cookieName: 'session',
   secret: process.env.SESSION_SECRET,
@@ -32,10 +34,11 @@ app.use(clientSessions({
   activeDuration: 5 * 60 * 1000,
   cookie: {
     httpOnly: true,
-    secure: true,           
-    sameSite: 'lax'        
+    secure: true,
+    sameSite: 'lax'
   }
 }));
+
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
