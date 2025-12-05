@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.set("trust proxy", 1); 
+app.set("trust proxy", 1);
 
 app.use(clientSessions({
   cookieName: 'session',
@@ -34,11 +34,10 @@ app.use(clientSessions({
   activeDuration: 5 * 60 * 1000,
   cookie: {
     httpOnly: true,
-    secure: true,
+    secure: false,
     sameSite: 'lax'
   }
 }));
-
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -71,13 +70,11 @@ const ensureLogin = (req, res, next) => {
   res.redirect('/login');
 };
 
-
 app.get('/', (req, res) => {
   res.render('home', { user: req.session?.user || null });
 });
 
 require('./routes/auth.routes')(app, User);
-
 require('./routes/task.routes')(app, Task, ensureLogin);
 
 app.get('/logout', (req, res) => {
@@ -85,19 +82,18 @@ app.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
-
 app.use((err, req, res, next) => {
   console.error('Server Error:', err.stack);
   res.status(500).render('error', {
     message: err.message || 'Something went wrong!',
-    user: req.session?.user || null   
+    user: req.session?.user || null
   });
 });
 
 app.use((req, res) => {
   res.status(404).render('error', {
     message: 'Page Not Found',
-    user: req.session?.user || null  
+    user: req.session?.user || null
   });
 });
 
