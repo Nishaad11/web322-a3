@@ -1,0 +1,8 @@
+<%- include('partials/header') %>
+<h2>Dashboard - Welcome, <%= user.username %>!</h2>
+<div class="stats">
+    <div class="stat">Total Tasks: <%= stats.total %></div>
+    <div class="stat">Completed: <%= stats.completed %></div>
+</div>
+<a href="/tasks" class="btn">View All Tasks</a>
+<%- include('partials/footer') %>

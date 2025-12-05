@@ -1,0 +1,25 @@
+<%- include('partials/header', { user: user || null }) %>
+
+<div class="text-center py-5 my-5">
+  <h1 class="display-3 mb-4">Welcome to TaskMaster Pro</h1>
+  <p class="lead mb-5">The most beautiful & powerful task manager for WEB322</p>
+
+  <% if (!user) { %>
+    <a href="/register" class="btn btn-primary btn-lg mx-2">Get Started</a>
+    <a href="/login" class="btn btn-outline-light btn-lg mx-2">Login</a>
+  <% } else { %>
+    <a href="/tasks" class="btn btn-success btn-lg mx-2">Go to My Tasks</a>
+    <a href="/dashboard" class="btn btn-info btn-lg mx-2">View Dashboard</a>
+  <% } %>
+</div>
+
+<div class="text-center text-white-50 mt-5">
+  <h3>Features</h3>
+  <div class="row mt-4">
+    <div class="col-md-4"><h5>Beautiful Design</h5></div>
+    <div class="col-md-4"><h5>Fast & Secure</h5></div>
+    <div class="col-md-4"><h5>MongoDB + PostgreSQL</h5></div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

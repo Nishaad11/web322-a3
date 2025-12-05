@@ -1,0 +1,20 @@
+<!-- views/error.ejs -->
+<% 
+  // This line makes sure "user" is ALWAYS defined, no matter what
+  const currentUser = (typeof user !== 'undefined' && user) ? user : null;
+  const msg = message || 'Something went wrong';
+%>
+
+<%- include('partials/header', { user: currentUser }) %>
+
+<div class="container text-center py-5 min-vh-100">
+  <div class="py-5">
+    <h1 class="display-1 text-danger fw-bold">Oops!</h1>
+    <p class="lead mt-4"><%= msg %></p>
+    <a href="<%= currentUser ? '/tasks' : '/login' %>" class="btn btn-primary btn-lg mt-4">
+      <%= currentUser ? 'Back to Tasks' : 'Go to Login' %>
+    </a>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
